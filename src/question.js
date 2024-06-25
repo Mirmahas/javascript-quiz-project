@@ -10,8 +10,6 @@ class Question {
     this.difficulty = difficulty;
   }
 
-  getQuestion() {}
-
   shuffleChoices() {
     for (let i = this.choices.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
