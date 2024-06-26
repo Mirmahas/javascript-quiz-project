@@ -55,7 +55,7 @@ class Quiz {
       );
     }
   }
-  //usin
+
   averageDifficulty() {
     let sum = 0;
     for (let i = 0; i < this.questions.length; i++) {
