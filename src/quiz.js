@@ -19,6 +19,7 @@ class Quiz {
     this.correctAnswers = 0;
     this.currentQuestionIndex = 0;
   }
+
   getQuestion() {
     return this.questions[this.currentQuestionIndex];
   }
@@ -41,7 +42,10 @@ class Quiz {
     }
   }
   hasEnded() {
-    if (this.currentQuestionIndex >= this.questions.length) {
+    if (
+      this.currentQuestionIndex >= this.questions.length ||
+      this.timeRemaining <= 0
+    ) {
       return true;
     } else {
       return false;
@@ -62,5 +66,24 @@ class Quiz {
       sum += this.questions[i].difficulty;
     }
     return sum / this.questions.length;
+  }
+  startTimer() {
+    this.timerInterval = setInterval(() => {
+      this.timeRemaining--;
+      document.getElementById(
+        "timeRemaining"
+      ).innerText = `Time remaining: ${this.timeRemaining} seconds`;
+      if (this.hasEnded()) {
+        clearInterval(this.timerInterval);
+        this.displayEndView();
+      }
+    }, 1000);
+  }
+  displayEndView() {
+    document.getElementById("quiz-container").style.display = "none";
+    document.getElementById("end-view").style.display = "block";
+    document.getElementById(
+      "score"
+    ).innerText = `Your score is ${this.correctAnswers} out of ${this.questions.length}`;
   }
 }
